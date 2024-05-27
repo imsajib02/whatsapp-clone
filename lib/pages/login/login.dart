@@ -25,11 +25,17 @@ class Login extends StatelessWidget {
         },
         listener: (context, state) {
 
+          if(state.status.isLoading) {
+            showLoader(context);
+          }
+
           if(state.status.isAuthorized) {
+            Navigator.of(context).pop();
             Router.neglect(context, () => context.pushNamed(HOME));
           }
 
           if(state.status.hasFailed) {
+            Navigator.of(context).pop();
             showSnackBar(
               context: context,
               message: AppLocalization.of(context)!.getTranslatedValue('authentication_failed')!,
