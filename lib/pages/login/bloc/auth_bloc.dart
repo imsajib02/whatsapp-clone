@@ -16,7 +16,7 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   final _myPref = getIt<MyPref>();
-  final _dbRef = FirebaseDatabase.instance.ref();
+  final _dbRef = FirebaseDatabase.instance.ref().child(dotenv.env['FIREBASE_DB']!).child(dotenv.env['TABLE_USERS']!);
 
   AuthBloc() : super(AuthState()) {
     on<SignInWithGoogle>(_signInWithGoogle);
@@ -29,6 +29,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       final GoogleSignInAccount? user = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication? googleAuth = await user?.authentication;
+
+      emit(state.copyWith(status: AuthStatus.loading));
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
@@ -47,7 +49,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       _myPref.saveAuthUser(authUser!);
 
-      await _dbRef.child(dotenv.env['FIREBASE_DB']!).child(dotenv.env['TABLE_USERS']!).push().set(authUser?.toJson()).then((_) async {
+      DatabaseEvent event = await _dbRef.orderByChild('id').equalTo(authUser?.id).once();
+
+      if(event.snapshot.value != null) {
+        emit(state.copyWith(status: AuthStatus.authorized));
+        return;
+      }
+
+      await _dbRef.push().set(authUser?.toJson()).then((_) async {
         emit(state.copyWith(status: AuthStatus.authorized));
       }).catchError((error) async {
         emit(state.copyWith(status: AuthStatus.failure));
