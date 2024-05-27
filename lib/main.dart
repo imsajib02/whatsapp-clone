@@ -1,39 +1,61 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:whatsapp/route/routes.dart';
+
+import 'barrel/localization.dart';
+import 'theme/app_theme.dart';
+
+Future<void> main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: kDebugMode ? '.env.development' : '.env.production');
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
 
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-      home: const MyHomePage(),
-    );
-  }
-}
+    return MaterialApp.router(
+      title: dotenv.env['APP_TITLE']!,
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.light,
+      locale: Locale(ENGLISH, 'US'),
+      localizationsDelegates: [
+        AppLocalization.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: supportedLocales,
+      localeResolutionCallback: (Locale? deviceLocale, Iterable<Locale> supportedLocales) {
 
-class MyHomePage extends StatefulWidget {
+        for(var locale in supportedLocales) {
 
-  const MyHomePage({super.key});
+          if(locale.languageCode == deviceLocale!.languageCode &&
+              locale.countryCode == deviceLocale.countryCode) {
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+            return deviceLocale;
+          }
+        }
 
-class _MyHomePageState extends State<MyHomePage> {
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      body: Column(
-        children: [],
-      ),
+        return supportedLocales.first;
+      },
+      routeInformationParser: router.routeInformationParser,
+      routerDelegate: router.routerDelegate,
     );
   }
 }
