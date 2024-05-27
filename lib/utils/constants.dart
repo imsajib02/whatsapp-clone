@@ -1,0 +1,1 @@
+enum AuthStatus {initial, authorized, unauthorized, failure}
