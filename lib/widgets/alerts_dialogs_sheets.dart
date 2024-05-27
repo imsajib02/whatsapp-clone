@@ -11,3 +11,17 @@ void showSnackBar({required BuildContext context, required String message, requi
     duration: const Duration(milliseconds: 1200),
   ));
 }
+
+void showLoader(BuildContext context) {
+
+  showDialog(
+    barrierDismissible: false,
+    context: context,
+    builder: (context) {
+
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    },
+  );
+}
