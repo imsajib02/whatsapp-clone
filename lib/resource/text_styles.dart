@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../barrel/resources.dart';
+
 class TextStyles {
 
   TextStyles._();
 
   static TextStyle get appbarTitleStyle => TextStyle(
-    fontSize: 15,
+    fontSize: 20,
     fontWeight: FontWeight.w500,
-    color: Colors.white,
+    color: kAccentColor,
   );
 
   static TextStyle get textFieldHintStyle => TextStyle(

@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,13 +8,20 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:whatsapp/route/routes.dart';
 
 import 'barrel/localization.dart';
+import 'barrel/models.dart';
+import 'barrel/utils.dart';
 import 'theme/app_theme.dart';
+
+User? authUser;
 
 Future<void> main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
   await dotenv.load(fileName: kDebugMode ? '.env.development' : '.env.production');
+  await Firebase.initializeApp();
+
+  registerServices();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
     runApp(const MyApp());
