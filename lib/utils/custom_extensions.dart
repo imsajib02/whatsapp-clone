@@ -13,3 +13,15 @@ extension ExtAuthStatus on AuthStatus {
   bool get isUnauthorized => this == AuthStatus.unauthorized;
   bool get hasFailed => this == AuthStatus.failure;
 }
+
+extension ExtSnackBarColor on SnackBarType {
+
+  Color get color {
+    switch (this) {
+      case SnackBarType.generic:
+        return Colors.black;
+      case SnackBarType.error:
+        return Colors.red;
+    }
+  }
+}
