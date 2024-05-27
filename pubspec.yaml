@@ -28,6 +28,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  flutter_dotenv: ^5.0.2
+  go_router: ^6.5.3
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -39,8 +41,6 @@ dependencies:
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
-  flutter_dotenv: ^5.0.2
-  go_router: ^6.5.3
   flutter_test:
     sdk: flutter
 
