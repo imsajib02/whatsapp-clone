@@ -46,11 +46,19 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.debug
+            multiDexEnabled true
         }
         debug {
             signingConfig signingConfigs.debug
+            multiDexEnabled true
         }
     }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.work:work-runtime-ktx:2.7.0'
+    implementation 'com.android.support:multidex:2.0.1'
 }
 
 flutter {
