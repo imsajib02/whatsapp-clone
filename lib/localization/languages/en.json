@@ -1,3 +1,6 @@
 {
-  "app_name": "Whatsapp Clone"
+  "app_name": "Whatsapp Clone",
+  "welcome_msg": "Welcome to Whatsapp",
+  "sign_in_msg": "Use your Google account to login to your account and start messaging immediately.",
+  "sign_in": "Sign-in with Google"
 }
