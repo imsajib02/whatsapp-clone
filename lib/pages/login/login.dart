@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../barrel/utils.dart';
 import '../../barrel/localization.dart';
 import '../../barrel/resources.dart';
+import '../../barrel/widgets.dart';
 import '../../route/routes.dart';
 import 'bloc/auth_bloc.dart';
 
@@ -29,7 +30,11 @@ class Login extends StatelessWidget {
           }
 
           if(state.status.hasFailed) {
-            //Router.neglect(context, () => context.goNamed(HOME));
+            showSnackBar(
+              context: context,
+              message: AppLocalization.of(context)!.getTranslatedValue('authentication_failed')!,
+              snackBarType: SnackBarType.error
+            );
           }
         },
         builder: (context, state) {
