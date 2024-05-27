@@ -30,6 +30,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final GoogleSignInAccount? user = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication? googleAuth = await user?.authentication;
 
+      emit(state.copyWith(status: AuthStatus.loading));
+
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
