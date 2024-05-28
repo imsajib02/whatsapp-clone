@@ -22,4 +22,10 @@ class TextStyles {
     fontSize: 13,
     fontWeight: FontWeight.w600,
   );
+
+  static TextStyle get profileInfoTextStyle => TextStyle(
+    fontSize: 13,
+    color: Colors.grey[700],
+    fontWeight: FontWeight.w400,
+  );
 }
