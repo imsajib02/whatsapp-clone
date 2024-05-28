@@ -11,7 +11,6 @@ class Updates extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: CustomHeader(),
       ),
     );
   }

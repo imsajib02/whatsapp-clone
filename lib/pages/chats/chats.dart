@@ -11,7 +11,6 @@ class Chats extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: CustomHeader(),
       ),
     );
   }

@@ -11,7 +11,6 @@ class Calls extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: CustomHeader(),
       ),
     );
   }
