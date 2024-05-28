@@ -7,6 +7,7 @@ import '../main.dart';
 final String INITIAL = '/';
 final String LOGIN = '/login';
 final String HOME = '/home';
+final String PROFILE = '/profile';
 
 final router = GoRouter(
   initialLocation: INITIAL,
@@ -28,6 +29,26 @@ final router = GoRouter(
       name: HOME,
       path: HOME,
       builder: (context, state) => Home(),
+    ),
+
+    GoRoute(
+      name: PROFILE,
+      path: PROFILE,
+      pageBuilder: (context, state) {
+
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: Profile(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+
+            return ScaleTransition(
+              scale: CurveTween(curve: Curves.easeIn).animate(animation),
+              alignment: Alignment.topLeft,
+              child: child,
+            );
+          },
+        );
+      },
     ),
   ],
   redirect: (BuildContext context, GoRouterState state) {
