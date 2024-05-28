@@ -3,5 +3,9 @@
   "welcome_msg": "Welcome to Whatsapp",
   "sign_in_msg": "Use your Google account to login to your account and start messaging immediately.",
   "sign_in": "Sign-in with Google",
-  "authentication_failed": "Authentication failed! Try again!"
+  "authentication_failed": "Authentication failed! Try again!",
+  "chats": "Chats",
+  "updates": "Updates",
+  "communities": "Communities",
+  "calls": "Calls"
 }
