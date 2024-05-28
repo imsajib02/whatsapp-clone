@@ -49,7 +49,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       _myPref.saveAuthUser(authUser!);
 
-      DatabaseEvent event = await _dbRef.orderByChild('id').equalTo(authUser?.id).once();
+      DatabaseEvent event = await _dbRef.orderByChild('email').equalTo(authUser?.email).once();
 
       if(event.snapshot.value != null) {
         emit(state.copyWith(status: AuthStatus.authorized));
