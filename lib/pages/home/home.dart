@@ -18,65 +18,68 @@ class Home extends StatelessWidget {
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
 
-          return Scaffold(
-            bottomNavigationBar: Container(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              decoration: BoxDecoration(
-                border: Border(
-                  top: BorderSide(width: .5, color: Colors.grey[300]!),
+          return SafeArea(
+            child: Scaffold(
+              appBar: CustomHeader(),
+              bottomNavigationBar: Container(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(width: .5, color: Colors.grey[300]!),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+
+                    BottomBarItem(
+                      onTap: (index) => context.read<HomeBloc>().add(OnNavItemTap(index)),
+                      index: 0,
+                      inactiveImagePath: 'assets/images/chat.png',
+                      activeImagePath: 'assets/images/chat_active.png',
+                      label: AppLocalization.of(context)!.getTranslatedValue('chats')!,
+                    ),
+
+                    BottomBarItem(
+                      onTap: (index) => context.read<HomeBloc>().add(OnNavItemTap(index)),
+                      index: 1,
+                      inactiveImagePath: 'assets/images/update.png',
+                      activeImagePath: 'assets/images/update_active.png',
+                      label: AppLocalization.of(context)!.getTranslatedValue('updates')!,
+                    ),
+
+                    BottomBarItem(
+                      onTap: (index) => context.read<HomeBloc>().add(OnNavItemTap(index)),
+                      index: 2,
+                      inactiveImagePath: 'assets/images/community.png',
+                      activeImagePath: 'assets/images/community_active.png',
+                      label: AppLocalization.of(context)!.getTranslatedValue('communities')!,
+                    ),
+
+                    BottomBarItem(
+                      onTap: (index) => context.read<HomeBloc>().add(OnNavItemTap(index)),
+                      index: 3,
+                      inactiveImagePath: 'assets/images/call.png',
+                      activeImagePath: 'assets/images/call_active.png',
+                      label: AppLocalization.of(context)!.getTranslatedValue('calls')!,
+                    ),
+                  ],
                 ),
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
+              body: IndexedStack(
+                index: state.currentIndex,
                 children: [
 
-                  BottomBarItem(
-                    onTap: (index) => context.read<HomeBloc>().add(OnNavItemTap(index)),
-                    index: 0,
-                    inactiveImagePath: 'assets/images/chat.png',
-                    activeImagePath: 'assets/images/chat_active.png',
-                    label: AppLocalization.of(context)!.getTranslatedValue('chats')!,
-                  ),
+                  Chats(),
 
-                  BottomBarItem(
-                    onTap: (index) => context.read<HomeBloc>().add(OnNavItemTap(index)),
-                    index: 1,
-                    inactiveImagePath: 'assets/images/update.png',
-                    activeImagePath: 'assets/images/update_active.png',
-                    label: AppLocalization.of(context)!.getTranslatedValue('updates')!,
-                  ),
+                  Updates(),
 
-                  BottomBarItem(
-                    onTap: (index) => context.read<HomeBloc>().add(OnNavItemTap(index)),
-                    index: 2,
-                    inactiveImagePath: 'assets/images/community.png',
-                    activeImagePath: 'assets/images/community_active.png',
-                    label: AppLocalization.of(context)!.getTranslatedValue('communities')!,
-                  ),
+                  Communities(),
 
-                  BottomBarItem(
-                    onTap: (index) => context.read<HomeBloc>().add(OnNavItemTap(index)),
-                    index: 3,
-                    inactiveImagePath: 'assets/images/call.png',
-                    activeImagePath: 'assets/images/call_active.png',
-                    label: AppLocalization.of(context)!.getTranslatedValue('calls')!,
-                  ),
+                  Calls(),
                 ],
               ),
-            ),
-            body: IndexedStack(
-              index: state.currentIndex,
-              children: [
-
-                Chats(),
-
-                Updates(),
-
-                Communities(),
-
-                Calls(),
-              ],
             ),
           );
         },
