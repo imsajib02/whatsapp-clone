@@ -47,17 +47,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         photoUrl: userCredential.user?.photoURL,
       );
 
-      _myPref.saveAuthUser(authUser!);
-
       DatabaseEvent event = await _dbRef.orderByChild('email').equalTo(authUser?.email).once();
 
       if(event.snapshot.value != null) {
+
+        _myPref.saveAuthUser(authUser!);
         emit(state.copyWith(status: AuthStatus.authorized));
+
         return;
       }
 
       await _dbRef.push().set(authUser?.toJson()).then((_) async {
+
+        _myPref.saveAuthUser(authUser!);
         emit(state.copyWith(status: AuthStatus.authorized));
+
       }).catchError((error) async {
         emit(state.copyWith(status: AuthStatus.failure));
       });
