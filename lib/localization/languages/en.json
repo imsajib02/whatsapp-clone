@@ -7,5 +7,12 @@
   "chats": "Chats",
   "updates": "Updates",
   "communities": "Communities",
-  "calls": "Calls"
+  "calls": "Calls",
+  "profile": "Profile",
+  "name": "Name",
+  "phone": "Phone",
+  "email": "Email",
+  "profile_photo": "Profile Photo",
+  "camera": "Camera",
+  "gallery": "Gallery"
 }
