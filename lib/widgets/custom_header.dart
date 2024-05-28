@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../barrel/localization.dart';
 import '../barrel/resources.dart';
 import '../barrel/utils.dart';
 import '../main.dart';
 import '../pages/home/bloc/home_bloc.dart';
+import '../route/routes.dart';
 
 class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
 
@@ -57,14 +59,18 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
 
                     GestureDetector(
                       behavior: HitTestBehavior.opaque,
-                      onTap: () {},
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: NetworkImage(authUser?.photoUrl ?? ''),
+                      onTap: () => context.pushNamed(PROFILE),
+                      child: Hero(
+                        tag: 'avatar',
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(authUser?.photoUrl ?? ''),
+                            ),
                           ),
                         ),
                       ),
