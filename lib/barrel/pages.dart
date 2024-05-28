@@ -5,3 +5,4 @@ export '../pages/chats/chats.dart';
 export '../pages/updates/updates.dart';
 export '../pages/communities/communities.dart';
 export '../pages/calls/calls.dart';
+export '../pages/profile/profile.dart';
