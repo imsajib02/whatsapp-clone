@@ -9,6 +9,7 @@ import 'package:whatsapp/route/routes.dart';
 
 import 'barrel/localization.dart';
 import 'barrel/models.dart';
+import 'barrel/resources.dart';
 import 'barrel/utils.dart';
 import 'theme/app_theme.dart';
 
@@ -34,6 +35,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: kBackgroundColorLight,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    ));
 
     return MaterialApp.router(
       title: dotenv.env['APP_TITLE']!,
