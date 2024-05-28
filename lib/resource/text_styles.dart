@@ -17,4 +17,9 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     color: Colors.grey[500],
   );
+
+  static TextStyle get bottomBarTextStyle => TextStyle(
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+  );
 }
